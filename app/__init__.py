@@ -17,11 +17,22 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
-login.login_view = 'login'
+login.login_view = 'auth.login'
 mail = Mail(app)
 bootstrap = Bootstrap(app)
 
 moment = Moment(app)
+
+
+from app.errors import bp as errors_bp
+app.register_blueprint(errors_bp)
+
+from app.auth import bp as auth_bp
+app.register_blueprint(auth_bp, url_prefix='/auth')
+
+from app.main import bp as main_bp
+app.register_blueprint(main_bp)
+
 
 
 if not app.debug:
@@ -54,4 +65,4 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     app.logger.info('程序启动')
 
-from app import routes, models,errors
+from app import models

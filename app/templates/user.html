@@ -12,24 +12,20 @@
                 {% if user.last_seen %}<p>上次浏览时间: {{ user.now_time() }}      </p>{% endif %}
                 {% if user.last_seen %}<p>上次浏览时间:  {{ moment(user.last_seen).format('lll') }} </p>{% endif %}
 
-
-
-
-
                 {% if user == current_user %}
-                <p><a href="{{ url_for('edit_profile') }}">编辑个人资料</a></p>
+                <p><a href="{{ url_for('main.edit_profile') }}">编辑个人资料</a></p>
 
 
                 {% elif not current_user.is_following(user) %}
                 <p>
-                    <form action="{{ url_for('follow', username=user.username) }}" method="post">
+                    <form action="{{ url_for('main.follow', username=user.username) }}" method="post">
                         {{ form.hidden_tag() }}
                         {{ form.submit(value='关注', class_='btn btn-default') }}
                     </form>
                 </p>
                 {% else %}
                 <p>
-                    <form action="{{ url_for('unfollow', username=user.username) }}" method="post">
+                    <form action="{{ url_for('main.unfollow', username=user.username) }}" method="post">
                         {{ form.hidden_tag() }}
                         {{ form.submit(value='取消关注',class_='btn btn-default') }}
                     </form>
