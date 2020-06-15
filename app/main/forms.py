@@ -39,3 +39,13 @@ class PostForm(FlaskForm):
     submit = SubmitField('提交')
 
 
+class SearchForm(FlaskForm):
+    """全文搜索"""
+    q = StringField('搜索', validators=[DataRequired()])
+
+    def __init__(self, *args, **kwargs):
+        if 'formdata' not in kwargs:
+            kwargs['formdata'] = request.args
+        if 'csrf_enabled' not in kwargs:
+            kwargs['csrf_enabled'] = False
+        super(SearchForm, self).__init__(*args, **kwargs)

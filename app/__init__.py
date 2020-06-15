@@ -9,6 +9,7 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
+from elasticsearch import Elasticsearch
 
 app = Flask(__name__)
 
@@ -23,6 +24,7 @@ bootstrap = Bootstrap(app)
 
 moment = Moment(app)
 
+app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) if app.config['ELASTICSEARCH_URL'] else None
 
 from app.errors import bp as errors_bp
 app.register_blueprint(errors_bp)
@@ -33,7 +35,7 @@ app.register_blueprint(auth_bp, url_prefix='/auth')
 from app.main import bp as main_bp
 app.register_blueprint(main_bp)
 
-
+# 添加新属性
 
 if not app.debug:
 
