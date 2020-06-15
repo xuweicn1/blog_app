@@ -1,7 +1,6 @@
 import json
 import requests
-from app import app
-
+from flask import current_app
 import time
 # def translate(text, source_language, dest_language):
 #     """文本翻译"""

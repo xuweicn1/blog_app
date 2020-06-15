@@ -1,16 +1,12 @@
-from app import db
-
 from datetime import datetime
 from datetime import timedelta
-
-from werkzeug.security import generate_password_hash, check_password_hash
-from app import login
-from flask_login import UserMixin
 from hashlib import md5
-
 from time import time
+from flask import current_app
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
-from app import app
+from app import db, login
 from app.search import add_to_index, remove_from_index, query_index
 
 
