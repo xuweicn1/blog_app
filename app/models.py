@@ -190,7 +190,7 @@ class User(PaginatedAPIMixin, UserMixin, db.Model):
 
     @staticmethod
     def check_token(token):
-        """检查token有效"""
+        """检查token有效w"""
         user = User.query.filter_by(token=token).first()
         if user is None or user.token_expiration < datetime.utcnow():
             return None
